@@ -128,12 +128,34 @@ function addToCard(e){
         }
     }
     newItem.querySelector(".btn-danger").addEventListener("click", removeItem)
+    newItem.querySelector('input').addEventListener('change', updateTotal)
 
     container.append(newItem)
+    updateTotal()
+
 }
  
 
 function removeItem(e){
     let buttonClicked = e.target
     buttonClicked.parentElement.parentElement.remove()
+    updateTotal()
+}
+function updateTotal(){
+    let container = document.getElementsByClassName("card-items")[0]
+    let items = container.getElementsByClassName('card-item')
+    let tot = 0
+
+    for (let item of items){
+        let prix = parseFloat(item.getElementsByTagName('span')[0].innerText)
+        let qt = item.getElementsByTagName('input')[0].value
+
+        tot+= prix * qt
+    }
+
+    document.getElementsByClassName('total')[0].innerHTML = tot + 'DT'
+}
+
+function subtotal (t){
+
 }
